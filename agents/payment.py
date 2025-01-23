@@ -1,17 +1,24 @@
-from events.order_events import OrderDeliveredEvent
+from events.payment_events import PaymentProcessedEvent, PaymentFailedEvent
 from event_dispatcher import EventDispatcher
 
-class Courier:
-    """Kurye, siparişi restorandan alıp müşteriye teslim eder."""
+class PaymentSystem:
+    """Ödeme sistemini simüle eder."""
     
-    def __init__(self, name, dispatcher: EventDispatcher):
-        self.name = name
+    def __init__(self, dispatcher: EventDispatcher):
         self.dispatcher = dispatcher
-        self.dispatcher.register_listener("order_prepared", self.pick_up_order)
+        self.dispatcher.register_listener("order_placed", self.process_payment)
 
-    def pick_up_order(self, payload):
-        """Siparişi teslim almak için çağrılır."""
+    def process_payment(self, payload):
+        """Ödemeyi işler."""
         order_id = payload["order_id"]
-        print(f"{self.name} kuryesi siparişi aldı. Yolda! (Sipariş ID: {order_id})")
-        event = OrderDeliveredEvent(order_id)
+        amount = len(payload["items"]) * 10  # Örnek ücretlendirme
+        print(f"Ödeme işleniyor: {amount} TL (Sipariş ID: {order_id})")
+
+        if amount > 0:
+            event = PaymentProcessedEvent(order_id, amount)
+            print(f"Ödeme başarılı! (Sipariş ID: {order_id})")
+        else:
+            event = PaymentFailedEvent(order_id, "Geçersiz tutar")
+            print(f"Ödeme başarısız! (Sipariş ID: {order_id})")
+
         self.dispatcher.dispatch(event)

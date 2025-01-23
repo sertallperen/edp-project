@@ -4,6 +4,7 @@ from agents.restaurant import Restaurant
 from agents.courier import Courier
 from agents.payment import PaymentSystem
 
+
 dispatcher = EventDispatcher()
 
 customer = Customer("Ahmet", dispatcher)

@@ -1,4 +1,4 @@
-from event_base import Event
+from events.event_base import Event
 
 class PaymentProcessedEvent(Event):
     """Ödeme başarılı olduğunda tetiklenir."""

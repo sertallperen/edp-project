@@ -1,9 +1,7 @@
 from events.order_events import OrderPreparedEvent
 from event_dispatcher import EventDispatcher
-
-class Restaurant:
-    """Restoran, siparişleri alır ve hazırlar."""
-    
+#Restoran, siparişleri alır ve hazırlar.
+class Restaurant:  
     def __init__(self, name, dispatcher: EventDispatcher):
         self.name = name
         self.dispatcher = dispatcher
