@@ -7,9 +7,9 @@ from agents.payment import PaymentSystem
 
 dispatcher = EventDispatcher()
 
-customer = Customer("Ahmet", dispatcher)
-restaurant = Restaurant("Lezzet Durağı", dispatcher)
+customer = Customer("Alperen", dispatcher)
+restaurant = Restaurant("Degisik Doner", dispatcher)
 courier = Courier("Mehmet Kurye", dispatcher)
 payment_system = PaymentSystem(dispatcher)
 
-customer.place_order(order_id="1001", items=["Pizza", "Kola"])
+customer.place_order(order_id="1001", items=["Doner", "Ayran"])

@@ -1,7 +1,7 @@
 from events.event_base import Event
 
 class PaymentProcessedEvent(Event):
-    """Ödeme başarılı olduğunda tetiklenir."""
+    """Triggered when the payment is successful."""
     event_name = "payment_processed"
 
     def __init__(self, order_id, amount):
@@ -12,7 +12,7 @@ class PaymentProcessedEvent(Event):
         super().__init__(payload)
 
 class PaymentFailedEvent(Event):
-    """Ödeme başarısız olduğunda tetiklenir."""
+    """Triggered when the payment fails."""
     event_name = "payment_failed"
 
     def __init__(self, order_id, reason):

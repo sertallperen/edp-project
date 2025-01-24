@@ -1,6 +1,7 @@
 from events.order_events import OrderPreparedEvent
 from event_dispatcher import EventDispatcher
-#Restoran, siparişleri alır ve hazırlar.
+
+# The restaurant receives and prepares orders.
 class Restaurant:  
     def __init__(self, name, dispatcher: EventDispatcher):
         self.name = name
@@ -8,8 +9,8 @@ class Restaurant:
         self.dispatcher.register_listener("order_placed", self.prepare_order)
 
     def prepare_order(self, payload):
-        """Siparişi hazırlar ve event yayınlar."""
+        """Prepares the order and dispatches an event."""
         order_id = payload["order_id"]
-        print(f"{self.name} restoranı siparişi hazırlıyor... (Sipariş ID: {order_id})")
+        print(f"{self.name} restaurant is preparing the order... (Order ID: {order_id})")
         event = OrderPreparedEvent(order_id)
         self.dispatcher.dispatch(event)

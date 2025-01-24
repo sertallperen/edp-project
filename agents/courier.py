@@ -2,7 +2,7 @@ from events.order_events import OrderDeliveredEvent
 from event_dispatcher import EventDispatcher
 
 class Courier:
-    """Kurye, siparişi restorandan alıp müşteriye teslim eder."""
+    """The courier picks up the order from the restaurant and delivers it to the customer."""
     
     def __init__(self, name, dispatcher: EventDispatcher):
         self.name = name
@@ -10,8 +10,8 @@ class Courier:
         self.dispatcher.register_listener("order_prepared", self.pick_up_order)
 
     def pick_up_order(self, payload):
-        """Siparişi teslim almak için çağrılır."""
+        """Called to pick up the order."""
         order_id = payload["order_id"]
-        print(f"{self.name} kuryesi siparişi aldı. Yolda! (Sipariş ID: {order_id})")
+        print(f"Courier {self.name} has picked up the order. On the way! (Order ID: {order_id})")
         event = OrderDeliveredEvent(order_id)
         self.dispatcher.dispatch(event)
