@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+env/
+venv/
+.idea/
+.vscode/
+*.code-workspace
+Pipfile.lock
+*.egg-info/
+*.log
+.DS_Store
+Thumbs.db
+.env
+.ipynb_checkpoints/
+*.codespaces/
